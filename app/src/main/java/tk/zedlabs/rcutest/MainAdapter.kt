@@ -9,7 +9,6 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import kotlinx.android.synthetic.main.list_item.view.*
 import tk.zedlabs.rcutest.models.Article
-import tk.zedlabs.rcutest.models.NewsResult
 
 class MainAdapter(private val myDataset : List<Article>, onImageListener : OnImageListener) : RecyclerView.Adapter<MainAdapter.MyViewHolder>() {
 

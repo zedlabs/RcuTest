@@ -8,17 +8,23 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
 import kotlinx.android.synthetic.main.activity_details.*
 import tk.zedlabs.rcutest.MainViewModel
+import tk.zedlabs.rcutest.MainViewModelFactory
 import tk.zedlabs.rcutest.R
+import tk.zedlabs.rcutest.application.NewsApplication
+import javax.inject.Inject
 
 
 class DetailsActivity : AppCompatActivity() {
 
     private lateinit var mainViewModel : MainViewModel
+     @Inject  lateinit var mainViewModelFactory: MainViewModelFactory
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_details)
@@ -28,7 +34,11 @@ class DetailsActivity : AppCompatActivity() {
         val position = i.getIntExtra("position", 0)
 
         Log.e("DetailsActivity", "position: $position")
-        mainViewModel = MainViewModel()
+
+        //DI
+        NewsApplication.newsComponent.inject(this)
+        mainViewModel = ViewModelProviders.of(this, mainViewModelFactory).get(MainViewModel::class.java)
+
         mainViewModel.data.observe(this, Observer {
             val currentArticle = it.articles!![position]
             Glide.with(this)

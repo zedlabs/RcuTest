@@ -6,7 +6,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Inject
 
-class RetrofitService @Inject constructor(){
+class RetrofitService{
     var logging   = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BASIC)
     var client : OkHttpClient = OkHttpClient.Builder().addInterceptor(logging).build()
 
